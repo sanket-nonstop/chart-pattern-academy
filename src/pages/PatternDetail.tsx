@@ -1,6 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { getPatternBySlug, patterns } from "@/data/patterns";
-import { ArrowLeft, TrendingDown, TrendingUp, Target, ShieldAlert, AlertTriangle, ArrowRight } from "lucide-react";
+import { quizData } from "@/data/quiz";
+import Quiz from "@/components/Quiz";
+import InteractiveChart from "@/components/InteractiveChart";
+import DifficultyBadge from "@/components/DifficultyBadge";
+import BookmarkButton from "@/components/BookmarkButton";
+import SEO from "@/components/SEO";
+import { ArrowLeft, TrendingDown, TrendingUp, Target, ShieldAlert, AlertTriangle, ArrowRight, Brain } from "lucide-react";
 
 const PatternDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -22,6 +28,12 @@ const PatternDetail = () => {
 
   return (
     <article className="pb-16">
+      <SEO
+        title={pattern.name}
+        description={`${pattern.shortDescription} Learn how to identify and trade the ${pattern.name} chart pattern with entry rules, stop-loss placement, and profit targets.`}
+        keywords={`${pattern.name}, ${pattern.category} pattern, chart pattern, technical analysis, trading strategy`}
+        canonical={`https://chart-pattern-academy.com/pattern/${pattern.slug}`}
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border">
         <div className="container mx-auto px-4 py-3">
@@ -35,14 +47,20 @@ const PatternDetail = () => {
       <header className="border-b border-border">
         <div className="container mx-auto px-4 py-10 md:py-14">
           <div className="mx-auto max-w-3xl">
-            <span className={`mb-3 inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
-              isBullish
-                ? "bg-primary/10 text-primary"
-                : "bg-bearish/10 text-bearish"
-            }`}>
-              <span className={`h-1.5 w-1.5 rounded-full ${isBullish ? "bg-primary" : "bg-bearish"}`} />
-              {pattern.category} pattern
-            </span>
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider ${
+                  isBullish
+                    ? "bg-primary/10 text-primary"
+                    : "bg-bearish/10 text-bearish"
+                }`}>
+                  <span className={`h-1.5 w-1.5 rounded-full ${isBullish ? "bg-primary" : "bg-bearish"}`} />
+                  {pattern.category} pattern
+                </span>
+                <DifficultyBadge level={pattern.difficulty} />
+              </div>
+              <BookmarkButton slug={pattern.slug} variant="default" />
+            </div>
             <h1 className="mb-3 font-display text-3xl font-bold text-foreground md:text-4xl">
               {pattern.name}
             </h1>
@@ -54,13 +72,15 @@ const PatternDetail = () => {
       <div className="container mx-auto px-4 pt-10">
         <div className="mx-auto max-w-3xl space-y-12">
           {/* Main image */}
-          <div className="overflow-hidden rounded-lg border border-border glow-green-sm">
-            <img
-              src={pattern.image}
-              alt={`${pattern.name} chart pattern example`}
-              className="w-full"
-            />
-          </div>
+          <InteractiveChart
+            image={pattern.image}
+            alt={`${pattern.name} chart pattern example`}
+            annotations={[
+              { label: "Pattern Formation", description: "Observe how the pattern develops over time", color: "#10b981" },
+              { label: "Entry Point", description: "Optimal entry after confirmation", color: "#3b82f6" },
+              { label: "Stop Loss", description: "Risk management level", color: "#ef4444" },
+            ]}
+          />
 
           {/* Definition */}
           <Section icon={<TrendingUp className="h-5 w-5 text-primary" />} title="What is it?">
@@ -119,6 +139,13 @@ const PatternDetail = () => {
               ))}
             </ul>
           </Section>
+
+          {/* Quiz */}
+          {quizData[pattern.slug] && (
+            <Section icon={<Brain className="h-5 w-5 text-primary" />} title="Test Your Knowledge">
+              <Quiz patternSlug={pattern.slug} questions={quizData[pattern.slug]} />
+            </Section>
+          )}
 
           {/* Related patterns */}
           <div className="border-t border-border pt-10">

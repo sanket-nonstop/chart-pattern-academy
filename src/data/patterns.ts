@@ -6,11 +6,15 @@ import flagsPennantsImg from "@/assets/patterns/flags-pennants.jpg";
 import trianglesImg from "@/assets/patterns/triangles.jpg";
 import wedgesImg from "@/assets/patterns/wedges.jpg";
 
+export type DifficultyLevel = "beginner" | "intermediate" | "advanced";
+
 export interface ChartPattern {
   slug: string;
   name: string;
   shortDescription: string;
   category: "reversal" | "continuation";
+  difficulty: DifficultyLevel;
+  learningOrder: number;
   image: string;
   definition: string;
   psychology: string;
@@ -24,34 +28,12 @@ export interface ChartPattern {
 
 export const patterns: ChartPattern[] = [
   {
-    slug: "head-and-shoulders",
-    name: "Head & Shoulders",
-    shortDescription: "A bearish reversal pattern with three peaks — the middle one being the tallest.",
-    category: "reversal",
-    image: headAndShouldersImg,
-    definition:
-      "The Head & Shoulders pattern consists of three peaks: a higher peak (head) flanked by two lower peaks (shoulders). It signals a trend reversal from bullish to bearish when the price breaks below the neckline connecting the two troughs.",
-    psychology:
-      "The left shoulder forms as bulls push price up, then profit-taking causes a pullback. The head forms as bulls try again with more force, but selling pressure increases. The right shoulder forms as bulls make a weaker attempt — confidence is fading. When the neckline breaks, it confirms that sellers have taken control.",
-    entry: "Enter a short position when the price breaks below the neckline with increased volume. Some traders wait for a retest of the neckline from below for confirmation.",
-    stopLoss: "Place the stop-loss above the right shoulder. This protects against a false breakdown and limits your risk if the pattern fails.",
-    target: "Measure the distance from the head to the neckline, then project that distance downward from the breakout point. This is your minimum price target.",
-    exampleImages: [headAndShouldersImg],
-    mistakes: [
-      "Trading the pattern before the neckline is broken — jumping in early often leads to losses.",
-      "Ignoring volume — a valid breakout should come with increasing volume.",
-      "Confusing normal price fluctuations with an actual Head & Shoulders formation.",
-    ],
-    falseSignals: [
-      "Low volume breakdowns that quickly reverse back above the neckline.",
-      "Patterns forming in strong uptrends where momentum can overpower the reversal signal.",
-    ],
-  },
-  {
     slug: "double-top",
     name: "Double Top",
     shortDescription: "A bearish reversal where price tests a resistance level twice and fails.",
     category: "reversal",
+    difficulty: "beginner",
+    learningOrder: 1,
     image: doubleTopImg,
     definition:
       "A Double Top is an 'M'-shaped pattern where price reaches a resistance level twice, fails to break through, and then reverses downward. The pattern is confirmed when price breaks below the support level (the trough between the two peaks).",
@@ -76,6 +58,8 @@ export const patterns: ChartPattern[] = [
     name: "Double Bottom",
     shortDescription: "A bullish reversal forming a 'W' shape at a support level.",
     category: "reversal",
+    difficulty: "beginner",
+    learningOrder: 2,
     image: doubleBottomImg,
     definition:
       "A Double Bottom is a 'W'-shaped pattern where price tests a support level twice, bounces both times, and then breaks above the resistance level (the peak between the two troughs). It signals a reversal from bearish to bullish.",
@@ -96,10 +80,38 @@ export const patterns: ChartPattern[] = [
     ],
   },
   {
+    slug: "head-and-shoulders",
+    name: "Head & Shoulders",
+    shortDescription: "A bearish reversal pattern with three peaks — the middle one being the tallest.",
+    category: "reversal",
+    difficulty: "intermediate",
+    learningOrder: 3,
+    image: headAndShouldersImg,
+    definition:
+      "The Head & Shoulders pattern consists of three peaks: a higher peak (head) flanked by two lower peaks (shoulders). It signals a trend reversal from bullish to bearish when the price breaks below the neckline connecting the two troughs.",
+    psychology:
+      "The left shoulder forms as bulls push price up, then profit-taking causes a pullback. The head forms as bulls try again with more force, but selling pressure increases. The right shoulder forms as bulls make a weaker attempt — confidence is fading. When the neckline breaks, it confirms that sellers have taken control.",
+    entry: "Enter a short position when the price breaks below the neckline with increased volume. Some traders wait for a retest of the neckline from below for confirmation.",
+    stopLoss: "Place the stop-loss above the right shoulder. This protects against a false breakdown and limits your risk if the pattern fails.",
+    target: "Measure the distance from the head to the neckline, then project that distance downward from the breakout point. This is your minimum price target.",
+    exampleImages: [headAndShouldersImg],
+    mistakes: [
+      "Trading the pattern before the neckline is broken — jumping in early often leads to losses.",
+      "Ignoring volume — a valid breakout should come with increasing volume.",
+      "Confusing normal price fluctuations with an actual Head & Shoulders formation.",
+    ],
+    falseSignals: [
+      "Low volume breakdowns that quickly reverse back above the neckline.",
+      "Patterns forming in strong uptrends where momentum can overpower the reversal signal.",
+    ],
+  },
+  {
     slug: "cup-and-handle",
     name: "Cup & Handle",
     shortDescription: "A bullish continuation pattern shaped like a tea cup with a small handle.",
     category: "continuation",
+    difficulty: "intermediate",
+    learningOrder: 4,
     image: cupAndHandleImg,
     definition:
       "The Cup & Handle pattern features a rounded bottom (the cup) followed by a small downward drift or consolidation (the handle). It's a bullish continuation pattern indicating the uptrend will resume after a period of consolidation.",
@@ -120,34 +132,12 @@ export const patterns: ChartPattern[] = [
     ],
   },
   {
-    slug: "flags-and-pennants",
-    name: "Flags & Pennants",
-    shortDescription: "Short-term continuation patterns that form after sharp price moves.",
-    category: "continuation",
-    image: flagsPennantsImg,
-    definition:
-      "Flags are rectangular consolidation patterns that slope against the prevailing trend. Pennants are small symmetrical triangles. Both form after a sharp price move (the 'flagpole') and signal that the trend will continue after the brief pause.",
-    psychology:
-      "After a sharp move, traders take profits causing a brief pullback or consolidation. However, the underlying momentum remains strong. The tight consolidation shows that sellers can't push price far — buyers are waiting. The breakout continues the original trend direction.",
-    entry: "Enter when price breaks out of the flag/pennant in the direction of the prior trend (the flagpole). Volume should increase on the breakout.",
-    stopLoss: "Place your stop-loss on the opposite side of the flag/pennant. For a bull flag, stop below the flag's low; for a bear flag, stop above the flag's high.",
-    target: "Measure the length of the flagpole and project it from the breakout point. This gives you the expected continuation distance.",
-    exampleImages: [flagsPennantsImg],
-    mistakes: [
-      "Confusing flags with trend channels — flags should be short-lived (1–3 weeks typically).",
-      "Trading flags that form without a clear prior impulsive move (no flagpole).",
-      "Ignoring the overall market trend — flags work best when they align with the broader trend.",
-    ],
-    falseSignals: [
-      "Flags that last too long lose their power — they may evolve into reversal patterns.",
-      "Low-volume breakouts from the flag that quickly reverse.",
-    ],
-  },
-  {
     slug: "triangles",
     name: "Triangles",
     shortDescription: "Ascending, descending, and symmetrical patterns showing price compression.",
     category: "continuation",
+    difficulty: "intermediate",
+    learningOrder: 5,
     image: trianglesImg,
     definition:
       "Triangle patterns form when price action narrows between converging trendlines. Ascending triangles have a flat top and rising bottom (bullish bias). Descending triangles have a flat bottom and falling top (bearish bias). Symmetrical triangles have both lines converging equally (neutral, breaks in direction of the prior trend).",
@@ -168,10 +158,38 @@ export const patterns: ChartPattern[] = [
     ],
   },
   {
+    slug: "flags-and-pennants",
+    name: "Flags & Pennants",
+    shortDescription: "Short-term continuation patterns that form after sharp price moves.",
+    category: "continuation",
+    difficulty: "advanced",
+    learningOrder: 6,
+    image: flagsPennantsImg,
+    definition:
+      "Flags are rectangular consolidation patterns that slope against the prevailing trend. Pennants are small symmetrical triangles. Both form after a sharp price move (the 'flagpole') and signal that the trend will continue after the brief pause.",
+    psychology:
+      "After a sharp move, traders take profits causing a brief pullback or consolidation. However, the underlying momentum remains strong. The tight consolidation shows that sellers can't push price far — buyers are waiting. The breakout continues the original trend direction.",
+    entry: "Enter when price breaks out of the flag/pennant in the direction of the prior trend (the flagpole). Volume should increase on the breakout.",
+    stopLoss: "Place your stop-loss on the opposite side of the flag/pennant. For a bull flag, stop below the flag's low; for a bear flag, stop above the flag's high.",
+    target: "Measure the length of the flagpole and project it from the breakout point. This gives you the expected continuation distance.",
+    exampleImages: [flagsPennantsImg],
+    mistakes: [
+      "Confusing flags with trend channels — flags should be short-lived (1–3 weeks typically).",
+      "Trading flags that form without a clear prior impulsive move (no flagpole).",
+      "Ignoring the overall market trend — flags work best when they align with the broader trend.",
+    ],
+    falseSignals: [
+      "Flags that last too long lose their power — they may evolve into reversal patterns.",
+      "Low-volume breakouts from the flag that quickly reverse.",
+    ],
+  },
+  {
     slug: "wedges",
     name: "Wedges",
     shortDescription: "Converging trendlines that slope in the same direction, signaling reversals.",
     category: "reversal",
+    difficulty: "advanced",
+    learningOrder: 7,
     image: wedgesImg,
     definition:
       "Wedge patterns form when both support and resistance trendlines slope in the same direction but converge. A Rising Wedge slopes upward and is bearish — price is expected to break downward. A Falling Wedge slopes downward and is bullish — price is expected to break upward.",

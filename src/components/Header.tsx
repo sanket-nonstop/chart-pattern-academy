@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, CandlestickChart } from "lucide-react";
+import { Menu, X, CandlestickChart, TrendingUp, GraduationCap, Target, GitCompare, Layers, Bookmark, Calendar } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,25 +20,47 @@ const Header = () => {
           <Link to="/" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
             Home
           </Link>
-          <Link to="/#patterns" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
-            Patterns
+          <Link to="/learn" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <GraduationCap className="h-4 w-4" />
+            Learn
           </Link>
+          <Link to="/practice" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <Target className="h-4 w-4" />
+            Practice
+          </Link>
+          <Link to="/daily" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <Calendar className="h-4 w-4" />
+            Daily
+          </Link>
+          <Link to="/bookmarks" className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+            <Bookmark className="h-4 w-4" />
+          </Link>
+          <ThemeToggle />
         </nav>
 
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="text-foreground md:hidden"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-foreground"
+            aria-label="Toggle menu"
+          >
+            {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {isOpen && (
         <nav className="border-t border-border bg-background px-4 py-4 md:hidden">
           <div className="flex flex-col gap-3">
             <Link to="/" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Home</Link>
-            <Link to="/#patterns" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Patterns</Link>
+            <Link to="/learn" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Learning Path</Link>
+            <Link to="/practice" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Practice</Link>
+            <Link to="/daily" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Daily Challenge</Link>
+            <Link to="/compare" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Compare</Link>
+            <Link to="/flashcards" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Flashcards</Link>
+            <Link to="/bookmarks" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Bookmarks</Link>
+            <Link to="/progress" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Progress</Link>
           </div>
         </nav>
       )}

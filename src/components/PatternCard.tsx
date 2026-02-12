@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import type { ChartPattern } from "@/data/patterns";
+import ProgressIndicator from "@/components/ProgressIndicator";
+import DifficultyBadge from "@/components/DifficultyBadge";
+import BookmarkButton from "@/components/BookmarkButton";
+import OptimizedImage from "@/components/OptimizedImage";
 
 interface PatternCardProps {
   pattern: ChartPattern;
@@ -20,22 +24,28 @@ const PatternCard = ({ pattern, index }: PatternCardProps) => {
       <div className={`h-0.5 w-full ${isBullish ? "bg-primary" : "bg-bearish"}`} />
 
       <div className="aspect-[16/10] overflow-hidden">
-        <img
+        <OptimizedImage
           src={pattern.image}
           alt={`${pattern.name} chart pattern`}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
+          className="h-full transition-transform duration-500 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col p-5">
-        <div className="mb-2.5 flex items-center gap-2">
-          <span className={`rounded px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${
-            isBullish
-              ? "bg-primary/10 text-primary"
-              : "bg-bearish/10 text-bearish"
-          }`}>
-            {pattern.category}
-          </span>
+        <div className="mb-2.5 flex flex-wrap items-center justify-between gap-2">
+          <div className="flex items-center gap-2 ">
+            <span className={`rounded px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider ${
+              isBullish
+                ? "bg-primary/10 text-primary"
+                : "bg-bearish/10 text-bearish"
+            }`}>
+              {pattern.category}
+            </span>
+            <DifficultyBadge level={pattern.difficulty} showIcon={false} />
+          </div>
+          <div className="flex items-center gap-1">
+            <ProgressIndicator slug={pattern.slug} />
+            <BookmarkButton slug={pattern.slug} />
+          </div>
         </div>
         <h3 className="mb-1.5 font-display text-lg font-bold text-foreground">
           {pattern.name}
