@@ -19,6 +19,10 @@ import Glossary from "./pages/Glossary";
 import RiskCalculator from "./pages/RiskCalculator";
 import Journal from "./pages/Journal";
 import Stats from "./pages/Stats";
+import Indicators from "./pages/Indicators";
+import VolumeAnalysis from "./pages/VolumeAnalysis";
+import Fibonacci from "./pages/Fibonacci";
+import OpenInterest from "./pages/OpenInterest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -47,6 +51,10 @@ const App = () => (
                 <Route path="/calculator" element={<RiskCalculator />} />
                 <Route path="/journal" element={<Journal />} />
                 <Route path="/stats" element={<Stats />} />
+                <Route path="/indicators" element={<Indicators />} />
+                <Route path="/volume" element={<VolumeAnalysis />} />
+                <Route path="/fibonacci" element={<Fibonacci />} />
+                <Route path="/open-interest" element={<OpenInterest />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
