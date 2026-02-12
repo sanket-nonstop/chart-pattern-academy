@@ -15,6 +15,10 @@ import Compare from "./pages/Compare";
 import Flashcards from "./pages/Flashcards";
 import Bookmarks from "./pages/Bookmarks";
 import Daily from "./pages/Daily";
+import Glossary from "./pages/Glossary";
+import RiskCalculator from "./pages/RiskCalculator";
+import Journal from "./pages/Journal";
+import Stats from "./pages/Stats";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -39,6 +43,10 @@ const App = () => (
                 <Route path="/flashcards" element={<Flashcards />} />
                 <Route path="/bookmarks" element={<Bookmarks />} />
                 <Route path="/daily" element={<Daily />} />
+                <Route path="/glossary" element={<Glossary />} />
+                <Route path="/calculator" element={<RiskCalculator />} />
+                <Route path="/journal" element={<Journal />} />
+                <Route path="/stats" element={<Stats />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
