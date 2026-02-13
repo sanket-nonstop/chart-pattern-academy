@@ -57,7 +57,7 @@ const Fibonacci = () => {
       <SEO title="Fibonacci Retracements & Extensions" description="Master Fibonacci retracements and extensions for trading. Interactive calculator with Indian market examples." />
     
       <div className="container mx-auto px-4 py-12">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
     {/* What is Fibonacci */}
           <Section title="What is Fibonacci?">
             <Card className="p-6">
