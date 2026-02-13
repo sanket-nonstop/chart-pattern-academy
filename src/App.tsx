@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingSidebar from "@/components/FloatingSidebar";
 import Index from "./pages/Index";
 import PatternDetail from "./pages/PatternDetail";
 import Progress from "./pages/Progress";
@@ -23,6 +24,9 @@ import Indicators from "./pages/Indicators";
 import VolumeAnalysis from "./pages/VolumeAnalysis";
 import Fibonacci from "./pages/Fibonacci";
 import OpenInterest from "./pages/OpenInterest";
+import Candlesticks from "./pages/Candlesticks";
+import FinancialBasics from "./pages/FinancialBasics";
+import ModuleDetail from "./pages/ModuleDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,9 +40,12 @@ const App = () => (
         <BrowserRouter>
           <div className="flex min-h-screen flex-col">
             <Header />
+            <FloatingSidebar />
             <main className="flex-1">
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/basics" element={<FinancialBasics />} />
+                <Route path="/basics/:moduleId" element={<ModuleDetail />} />
                 <Route path="/pattern/:slug" element={<PatternDetail />} />
                 <Route path="/progress" element={<Progress />} />
                 <Route path="/learn" element={<Learn />} />
@@ -55,6 +62,7 @@ const App = () => (
                 <Route path="/volume" element={<VolumeAnalysis />} />
                 <Route path="/fibonacci" element={<Fibonacci />} />
                 <Route path="/open-interest" element={<OpenInterest />} />
+                <Route path="/candlesticks" element={<Candlesticks />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
