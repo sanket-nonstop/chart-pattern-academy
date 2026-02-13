@@ -55,148 +55,10 @@ const Fibonacci = () => {
   return (
     <>
       <SEO title="Fibonacci Retracements & Extensions" description="Master Fibonacci retracements and extensions for trading. Interactive calculator with Indian market examples." />
+    
       <div className="container mx-auto px-4 py-12">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-8 text-center">
-            <Ruler className="mx-auto mb-4 h-12 w-12 text-primary" />
-            <h1 className="mb-2 font-display text-4xl font-bold text-foreground">Fibonacci Retracements & Extensions</h1>
-            <p className="text-muted-foreground">Find support, resistance, and profit targets using the golden ratio</p>
-          </div>
-
-          {/* Interactive Calculator */}
-          <Section title="Fibonacci Calculator">
-            <Card className="p-6">
-              <div className="mb-6 flex gap-2">
-                <Button 
-                  variant={trendType === "uptrend" ? "default" : "outline"}
-                  onClick={() => setTrendType("uptrend")}
-                  className="flex-1"
-                >
-                  <TrendingUp className="mr-2 h-4 w-4" />
-                  Uptrend
-                </Button>
-                <Button 
-                  variant={trendType === "downtrend" ? "default" : "outline"}
-                  onClick={() => setTrendType("downtrend")}
-                  className="flex-1"
-                >
-                  <TrendingDown className="mr-2 h-4 w-4" />
-                  Downtrend
-                </Button>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="space-y-4">
-                  <div>
-                    <div className="mb-2 flex justify-between">
-                      <label className="text-sm font-semibold">Swing Low</label>
-                      <span className="text-sm font-bold text-primary">₹{swingLow}</span>
-                    </div>
-                    <Slider value={[swingLow]} onValueChange={(v) => setSwingLow(v[0])} min={2000} max={3000} step={10} />
-                  </div>
-
-                  <div>
-                    <div className="mb-2 flex justify-between">
-                      <label className="text-sm font-semibold">Swing High</label>
-                      <span className="text-sm font-bold text-primary">₹{swingHigh}</span>
-                    </div>
-                    <Slider value={[swingHigh]} onValueChange={(v) => setSwingHigh(v[0])} min={2000} max={3000} step={10} />
-                  </div>
-
-                  <div className="rounded-lg bg-muted p-3 text-sm">
-                    <div className="font-semibold">Range: ₹{Math.abs(swingHigh - swingLow)}</div>
-                    <div className="text-muted-foreground">Move: {((Math.abs(swingHigh - swingLow) / swingLow) * 100).toFixed(2)}%</div>
-                  </div>
-                </div>
-
-                <div className="rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 p-4">
-                  <h3 className="mb-3 font-semibold">Retracement Levels</h3>
-                  <div className="space-y-2">
-                    {fibLevels.filter(l => l.ratio > 0 && l.ratio < 1).map((level) => (
-                      <div key={level.value} className="flex justify-between rounded-lg bg-background/50 p-2 text-sm">
-                        <span className="font-medium">{level.percent}</span>
-                        <span className="font-bold text-primary">₹{level.price.toFixed(2)}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-lg border border-green-500/30 bg-green-500/5 p-4">
-                <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
-                  <Target className="h-4 w-4" />
-                  Extension Targets (Profit Levels)
-                </h3>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {extensions.map((ext, i) => (
-                    <div key={i} className="flex justify-between rounded-lg bg-background/50 p-2 text-sm">
-                      <span>{ext.percent}</span>
-                      <span className="font-bold text-green-600 dark:text-green-400">₹{ext.price.toFixed(2)}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </Card>
-          </Section>
-
-          {/* Visual Chart Representation */}
-          <Section title="Visual Fibonacci Levels">
-            <Card className="p-6">
-              <div className="relative h-96 rounded-lg bg-gradient-to-b from-muted/30 to-muted/10">
-                {/* Price axis */}
-                <div className="absolute left-0 top-0 bottom-0 w-16 border-r border-border">
-                  {fibLevels.map((level, i) => (
-                    <div 
-                      key={i}
-                      className="absolute right-2 text-xs font-mono"
-                      style={{ top: `${(1 - level.ratio) * 100}%`, transform: 'translateY(-50%)' }}
-                    >
-                      ₹{level.price.toFixed(0)}
-                    </div>
-                  ))}
-                </div>
-
-                {/* Fib levels */}
-                <div className="absolute left-16 right-0 top-0 bottom-0">
-                  {fibLevels.map((level, i) => (
-                    <div
-                      key={i}
-                      className="absolute left-0 right-0 border-t-2 border-dashed"
-                      style={{ 
-                        top: `${(1 - level.ratio) * 100}%`,
-                        borderColor: level.color.replace('bg-', ''),
-                        opacity: 0.6
-                      }}
-                    >
-                      <span className="ml-2 text-xs font-semibold" style={{ color: level.color.replace('bg-', '') }}>
-                        {level.percent}
-                      </span>
-                    </div>
-                  ))}
-
-                  {/* Trend line */}
-                  <svg className="absolute inset-0 h-full w-full">
-                    <line 
-                      x1="10%" 
-                      y1={trendType === "uptrend" ? "95%" : "5%"}
-                      x2="90%" 
-                      y2={trendType === "uptrend" ? "5%" : "95%"}
-                      stroke="currentColor" 
-                      strokeWidth="3"
-                      className="text-primary"
-                    />
-                    <circle cx="10%" cy={trendType === "uptrend" ? "95%" : "5%"} r="6" fill="currentColor" className="text-primary" />
-                    <circle cx="90%" cy={trendType === "uptrend" ? "5%" : "95%"} r="6" fill="currentColor" className="text-primary" />
-                  </svg>
-                </div>
-              </div>
-              <p className="mt-4 text-center text-sm text-muted-foreground">
-                {trendType === "uptrend" ? "Uptrend: Draw from Low to High" : "Downtrend: Draw from High to Low"}
-              </p>
-            </Card>
-          </Section>
-
-          {/* What is Fibonacci */}
+    {/* What is Fibonacci */}
           <Section title="What is Fibonacci?">
             <Card className="p-6">
               <p className="mb-4 text-muted-foreground">
@@ -245,7 +107,7 @@ const Fibonacci = () => {
             {selectedLevelData && (
               <Card className="p-6">
                 <div className="mb-4 flex items-center gap-3">
-                  <div className={`h-12 w-12 rounded-lg ${selectedLevelData.color} flex items-center justify-center text-white font-bold`}>
+                  <div className={`h-14 w-14 rounded-lg ${selectedLevelData.color} flex items-center justify-center text-white font-bold`}>
                     {selectedLevelData.percent}
                   </div>
                   <div>
@@ -394,6 +256,241 @@ const Fibonacci = () => {
                 title="Wait for Confirmation"
                 description="Don't buy just because price hit a Fib level. Wait for reversal pattern or candlestick"
               />
+            </div>
+          </Section>
+
+          <div className="mb-8 text-center">
+            <Ruler className="mx-auto mb-4 h-12 w-12 text-primary" />
+            <h1 className="mb-2 font-display text-4xl font-bold text-foreground">Fibonacci Retracements & Extensions</h1>
+            <p className="text-muted-foreground">Find support, resistance, and profit targets using the golden ratio</p>
+          </div>
+
+          {/* Interactive Calculator */}
+          <Section title="Fibonacci Calculator">
+            <Card className="p-6">
+              <div className="mb-6 flex gap-2">
+                <Button 
+                  variant={trendType === "uptrend" ? "default" : "outline"}
+                  onClick={() => setTrendType("uptrend")}
+                  className="flex-1"
+                >
+                  <TrendingUp className="mr-2 h-4 w-4" />
+                  Uptrend
+                </Button>
+                <Button 
+                  variant={trendType === "downtrend" ? "default" : "outline"}
+                  onClick={() => setTrendType("downtrend")}
+                  className="flex-1"
+                >
+                  <TrendingDown className="mr-2 h-4 w-4" />
+                  Downtrend
+                </Button>
+              </div>
+
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-4">
+                  <div>
+                    <div className="mb-2 flex justify-between">
+                      <label className="text-sm font-semibold">Swing Low</label>
+                      <span className="text-sm font-bold text-primary">₹{swingLow}</span>
+                    </div>
+                    <Slider value={[swingLow]} onValueChange={(v) => setSwingLow(v[0])} min={2000} max={3000} step={10} />
+                  </div>
+
+                  <div>
+                    <div className="mb-2 flex justify-between">
+                      <label className="text-sm font-semibold">Swing High</label>
+                      <span className="text-sm font-bold text-primary">₹{swingHigh}</span>
+                    </div>
+                    <Slider value={[swingHigh]} onValueChange={(v) => setSwingHigh(v[0])} min={2000} max={3000} step={10} />
+                  </div>
+
+                  <div className="rounded-lg bg-muted p-3 text-sm">
+                    <div className="font-semibold">Range: ₹{Math.abs(swingHigh - swingLow)}</div>
+                    <div className="text-muted-foreground">Move: {((Math.abs(swingHigh - swingLow) / swingLow) * 100).toFixed(2)}%</div>
+                  </div>
+                </div>
+
+                <div className="rounded-lg bg-gradient-to-br from-primary/10 to-primary/5 p-4">
+                  <h3 className="mb-3 font-semibold">Retracement Levels</h3>
+                  <div className="space-y-2">
+                    {fibLevels.filter(l => l.ratio > 0 && l.ratio < 1).map((level) => (
+                      <div key={level.value} className="flex justify-between rounded-lg bg-background/50 p-2 text-sm">
+                        <span className="font-medium">{level.percent}</span>
+                        <span className="font-bold text-primary">₹{level.price.toFixed(2)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-lg border border-green-500/30 bg-green-500/5 p-4">
+                <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-green-600 dark:text-green-400">
+                  <Target className="h-4 w-4" />
+                  Extension Targets (Profit Levels)
+                </h3>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {extensions.map((ext, i) => (
+                    <div key={i} className="flex justify-between rounded-lg bg-background/50 p-2 text-sm">
+                      <span>{ext.percent}</span>
+                      <span className="font-bold text-green-600 dark:text-green-400">₹{ext.price.toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          </Section>
+
+          {/* Visual Chart Representation */}
+          <Section title="Visual Fibonacci Levels">
+            <div className="grid gap-6 md:grid-cols-2">
+              {/* Uptrend Example */}
+              <Card className="p-4">
+                <h3 className="mb-3 text-center font-semibold text-green-600 dark:text-green-400">Uptrend: Bottom to Top</h3>
+                <div className="relative h-96 rounded-lg bg-gradient-to-b from-muted/30 to-muted/10 border border-border">
+                  {/* Price axis */}
+                  <div className="absolute left-0 top-0 bottom-0 w-16 border-r border-border bg-muted/20">
+                    {fibLevels.map((level, i) => (
+                      <div 
+                        key={i}
+                        className="absolute right-2 text-xs font-mono font-semibold"
+                        style={{ top: `${(1 - level.ratio) * 100}%`, transform: 'translateY(-50%)' }}
+                      >
+                        ₹{(swingLow + (swingHigh - swingLow) * level.ratio).toFixed(0)}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Fib levels */}
+                  <div className="absolute left-16 right-0 top-0 bottom-0">
+                    {fibLevels.map((level, i) => (
+                      <div
+                        key={i}
+                        className="absolute left-0 right-0 border-t-2 border-dashed"
+                        style={{ 
+                          top: `${(1 - level.ratio) * 100}%`,
+                          borderColor: level.value === '0' || level.value === '100' ? '#666' : 
+                                     level.value === '236' ? '#22c55e' :
+                                     level.value === '382' ? '#3b82f6' :
+                                     level.value === '500' ? '#eab308' :
+                                     level.value === '618' ? '#f97316' : '#ef4444',
+                          opacity: 0.7
+                        }}
+                      >
+                        <span 
+                          className="ml-2 text-xs font-bold"
+                          style={{ 
+                            color: level.value === '0' || level.value === '100' ? '#666' :
+                                   level.value === '236' ? '#22c55e' :
+                                   level.value === '382' ? '#3b82f6' :
+                                   level.value === '500' ? '#eab308' :
+                                   level.value === '618' ? '#f97316' : '#ef4444'
+                          }}
+                        >
+                          {level.percent}
+                        </span>
+                      </div>
+                    ))}
+
+                    {/* Uptrend line */}
+                    <svg className="absolute inset-0 h-full w-full">
+                      <defs>
+                        <marker id="arrowhead-up" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                          <polygon points="0 0, 10 3, 0 6" fill="#22c55e" />
+                        </marker>
+                      </defs>
+                      <path
+                        d="M 10 95 L 30 85 L 40 90 L 60 70 L 70 75 L 90 5"
+                        stroke="#22c55e"
+                        strokeWidth="3"
+                        fill="none"
+                        markerEnd="url(#arrowhead-up)"
+                      />
+                      <circle cx="10" cy="95" r="6" fill="#22c55e" />
+                      <text x="10" y="105" fontSize="10" fill="currentColor" textAnchor="middle">Start</text>
+                      <circle cx="90" cy="5" r="6" fill="#22c55e" />
+                      <text x="90" y="15" fontSize="10" fill="currentColor" textAnchor="middle">End</text>
+                    </svg>
+                  </div>
+                </div>
+                <p className="mt-3 text-center text-xs text-muted-foreground">
+                  Draw from Swing Low to Swing High. Price retraces down to Fib levels before continuing up.
+                </p>
+              </Card>
+
+              {/* Downtrend Example */}
+              <Card className="p-4">
+                <h3 className="mb-3 text-center font-semibold text-red-600 dark:text-red-400">Downtrend: Top to Bottom</h3>
+                <div className="relative h-96 rounded-lg bg-gradient-to-b from-muted/30 to-muted/10 border border-border">
+                  {/* Price axis */}
+                  <div className="absolute left-0 top-0 bottom-0 w-16 border-r border-border bg-muted/20">
+                    {fibLevels.map((level, i) => (
+                      <div 
+                        key={i}
+                        className="absolute right-2 text-xs font-mono font-semibold"
+                        style={{ top: `${level.ratio * 100}%`, transform: 'translateY(-50%)' }}
+                      >
+                        ₹{(swingHigh - (swingHigh - swingLow) * level.ratio).toFixed(0)}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Fib levels */}
+                  <div className="absolute left-16 right-0 top-0 bottom-0">
+                    {fibLevels.map((level, i) => (
+                      <div
+                        key={i}
+                        className="absolute left-0 right-0 border-t-2 border-dashed"
+                        style={{ 
+                          top: `${level.ratio * 100}%`,
+                          borderColor: level.value === '0' || level.value === '100' ? '#666' : 
+                                     level.value === '236' ? '#22c55e' :
+                                     level.value === '382' ? '#3b82f6' :
+                                     level.value === '500' ? '#eab308' :
+                                     level.value === '618' ? '#f97316' : '#ef4444',
+                          opacity: 0.7
+                        }}
+                      >
+                        <span 
+                          className="ml-2 text-xs font-bold"
+                          style={{ 
+                            color: level.value === '0' || level.value === '100' ? '#666' :
+                                   level.value === '236' ? '#22c55e' :
+                                   level.value === '382' ? '#3b82f6' :
+                                   level.value === '500' ? '#eab308' :
+                                   level.value === '618' ? '#f97316' : '#ef4444'
+                          }}
+                        >
+                          {level.percent}
+                        </span>
+                      </div>
+                    ))}
+
+                    {/* Downtrend line */}
+                    <svg className="absolute inset-0 h-full w-full">
+                      <defs>
+                        <marker id="arrowhead-down" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                          <polygon points="0 0, 10 3, 0 6" fill="#ef4444" />
+                        </marker>
+                      </defs>
+                      <path
+                        d="M 10 5 L 30 15 L 40 10 L 60 30 L 70 25 L 90 95"
+                        stroke="#ef4444"
+                        strokeWidth="3"
+                        fill="none"
+                        markerEnd="url(#arrowhead-down)"
+                      />
+                      <circle cx="10" cy="5" r="6" fill="#ef4444" />
+                      <text x="10" y="-5" fontSize="10" fill="currentColor" textAnchor="middle">Start</text>
+                      <circle cx="90" cy="95" r="6" fill="#ef4444" />
+                      <text x="90" y="105" fontSize="10" fill="currentColor" textAnchor="middle">End</text>
+                    </svg>
+                  </div>
+                </div>
+                <p className="mt-3 text-center text-xs text-muted-foreground">
+                  Draw from Swing High to Swing Low. Price retraces up to Fib levels before continuing down.
+                </p>
+              </Card>
             </div>
           </Section>
 
