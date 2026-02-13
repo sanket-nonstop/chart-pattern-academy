@@ -25,6 +25,11 @@ import VolumeAnalysis from "./pages/VolumeAnalysis";
 import Fibonacci from "./pages/Fibonacci";
 import OpenInterest from "./pages/OpenInterest";
 import Candlesticks from "./pages/Candlesticks";
+import PriceAction from "./pages/PriceAction";
+import StartInvesting from "./pages/StartInvesting";
+import CaseStudies from "./pages/CaseStudies";
+import SectorAnalysis from "./pages/SectorAnalysis";
+import PatternCombinations from "./pages/PatternCombinations";
 import FinancialBasics from "./pages/FinancialBasics";
 import ModuleDetail from "./pages/ModuleDetail";
 import NotFound from "./pages/NotFound";
@@ -63,6 +68,11 @@ const App = () => (
                 <Route path="/fibonacci" element={<Fibonacci />} />
                 <Route path="/open-interest" element={<OpenInterest />} />
                 <Route path="/candlesticks" element={<Candlesticks />} />
+                <Route path="/price-action" element={<PriceAction />} />
+                <Route path="/start-investing" element={<StartInvesting />} />
+                <Route path="/case-studies" element={<CaseStudies />} />
+                <Route path="/sector-analysis" element={<SectorAnalysis />} />
+                <Route path="/pattern-combinations" element={<PatternCombinations />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>

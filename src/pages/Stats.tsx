@@ -18,8 +18,8 @@ const Stats = () => {
         <div className="mx-auto max-w-6xl">
           <div className="mb-8 text-center">
             <BarChart3 className="mx-auto mb-4 h-12 w-12 text-primary" />
-            <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Pattern Statistics</h1>
-            <p className="text-muted-foreground">Historical success rates based on market data</p>
+            <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Chart Pattern Statistics</h1>
+            <p className="text-muted-foreground">Historical success rates for 17 chart patterns based on market data</p>
           </div>
 
           <div className="mb-8 rounded-lg border border-border bg-card p-6">

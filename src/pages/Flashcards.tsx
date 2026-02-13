@@ -28,7 +28,7 @@ const Flashcards = () => {
           <div className="mb-8 text-center">
             <Layers className="mx-auto mb-4 h-12 w-12 text-primary" />
             <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Pattern Flashcards</h1>
-            <p className="text-muted-foreground">Quick review mode for pattern recognition</p>
+            <p className="text-muted-foreground">Quick review mode for 17 chart patterns</p>
           </div>
 
           <div className="mb-4 text-center text-sm text-muted-foreground">

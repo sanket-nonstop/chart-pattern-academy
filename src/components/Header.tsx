@@ -76,12 +76,17 @@ const Header = () => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-              <DropdownMenuLabel>Intermediate Topics</DropdownMenuLabel>
+              {/* <DropdownMenuLabel>Intermediate Topics</DropdownMenuLabel> */}
+              <DropdownMenuItem asChild><Link to="/candlesticks">Candlestick Patterns</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/price-action">Price Action</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/indicators">Technical Indicators</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/volume">Volume Analysis</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/fibonacci">Fibonacci</Link></DropdownMenuItem>
               <DropdownMenuItem asChild><Link to="/open-interest">Open Interest</Link></DropdownMenuItem>
-              <DropdownMenuItem asChild><Link to="/candlesticks">Candlestick Patterns</Link></DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild><Link to="/case-studies">Case Studies</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/sector-analysis">Sector Analysis</Link></DropdownMenuItem>
+              <DropdownMenuItem asChild><Link to="/pattern-combinations">Pattern Combinations</Link></DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -156,11 +161,12 @@ const Header = () => {
               <Link to="/stats" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground">Pattern Stats</Link>
               <div className="border-t border-border pt-3 mt-3">
                 <p className="text-xs font-semibold text-muted-foreground mb-2">INTERMEDIATE TOPICS</p>
+                <Link to="/candlesticks" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Candlestick Patterns</Link>
+                <Link to="/price-action" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Price Action</Link>
                 <Link to="/indicators" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Technical Indicators</Link>
                 <Link to="/volume" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Volume Analysis</Link>
                 <Link to="/fibonacci" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Fibonacci</Link>
-                <Link to="/open-interest" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Open Interest</Link>
-                <Link to="/candlesticks" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block">Candlestick Patterns</Link>
+                <Link to="/open-interest" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block">Open Interest</Link>
               </div>
               <div className="border-t border-border pt-3 mt-3">
                 <Link to="/compare" onClick={() => setIsOpen(false)} className="text-sm font-medium text-foreground block mb-2">Compare</Link>

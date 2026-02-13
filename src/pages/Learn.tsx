@@ -20,7 +20,7 @@ const Learn = () => {
               Your Learning Journey
             </h1>
             <p className="text-muted-foreground">
-              Master chart patterns step-by-step. Start with beginner patterns and progress to advanced techniques.
+              Master 17 chart patterns + 30 candlestick patterns step-by-step. Start with beginner patterns and progress to advanced techniques.
             </p>
           </div>
 

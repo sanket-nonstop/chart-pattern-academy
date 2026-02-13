@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
 import { useProgress } from "@/hooks/use-progress";
 import { patterns } from "@/data/patterns";
+import { candlestickPatterns } from "@/data/candlestick-patterns";
 import SEO from "@/components/SEO";
-import { Trophy, Target, BookOpen, RotateCcw } from "lucide-react";
+import { Trophy, Target, BookOpen, RotateCcw, BarChart3, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Progress = () => {
   const { progress, resetProgress } = useProgress();
   const totalPatterns = patterns.length;
+  const totalCandlesticks = candlestickPatterns.length;
+  const totalAll = totalPatterns + totalCandlesticks;
   const completedCount = progress.completedPatterns.length;
   const completionRate = Math.round((completedCount / totalPatterns) * 100);
   const averageScore = Object.values(progress.quizScores).length > 0
@@ -35,11 +39,11 @@ const Progress = () => {
           </div>
 
           {/* Stats */}
-          <div className="mb-8 grid gap-4 sm:grid-cols-3">
+          <div className="mb-8 grid gap-4 sm:grid-cols-4">
             <div className="rounded-lg border border-border bg-card p-6">
               <div className="mb-2 flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-primary" />
-                <span className="text-sm text-muted-foreground">Patterns Completed</span>
+                <BarChart3 className="h-5 w-5 text-primary" />
+                <span className="text-sm text-muted-foreground">Chart Patterns</span>
               </div>
               <p className="font-display text-3xl font-bold text-foreground">
                 {completedCount}/{totalPatterns}
@@ -48,10 +52,21 @@ const Progress = () => {
 
             <div className="rounded-lg border border-border bg-card p-6">
               <div className="mb-2 flex items-center gap-2">
+                <Activity className="h-5 w-5 text-primary" />
+                <span className="text-sm text-muted-foreground">Candlestick Patterns</span>
+              </div>
+              <p className="font-display text-3xl font-bold text-foreground">
+                0/{totalCandlesticks}
+              </p>
+            </div>
+
+            <div className="rounded-lg border border-border bg-card p-6">
+              <div className="mb-2 flex items-center gap-2">
                 <Target className="h-5 w-5 text-primary" />
-                <span className="text-sm text-muted-foreground">Completion Rate</span>
+                <span className="text-sm text-muted-foreground">Total Progress</span>
               </div>
               <p className="font-display text-3xl font-bold text-foreground">{completionRate}%</p>
+              <p className="text-xs text-muted-foreground mt-1">{completedCount}/{totalAll} patterns</p>
             </div>
 
             <div className="rounded-lg border border-border bg-card p-6">

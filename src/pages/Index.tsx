@@ -71,13 +71,13 @@ const Index = () => {
 
             <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Link to="/basics">
-                <Button size="lg" className="gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                <Button size="lg" className="gap-2 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 hover:text-white">
                   <Sparkles className="h-5 w-5" />
                   Start Learning Free
                 </Button>
               </Link>
               <a href="#patterns">
-                <Button size="lg" variant="outline" className="gap-2 border-green-500/50 hover:bg-green-500/10">
+                <Button size="lg" variant="outline" className="gap-2 border-green-500/50 hover:bg-green-500/10 hover:text-green-400">
                   <BarChart3 className="h-5 w-5" />
                   Explore Patterns
                 </Button>
@@ -87,8 +87,8 @@ const Index = () => {
             {/* Stats Bar */}
             <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
               {[
-                { label: "Chart Patterns", value: "17+", icon: BarChart3 },
-                { label: "Practice Questions", value: "50+", icon: Target },
+                { label: "Chart Patterns", value: "17", icon: BarChart3 },
+                { label: "Candlestick Patterns", value: "30", icon: Activity },
                 { label: "Interactive Tools", value: "10+", icon: Calculator },
                 { label: "Success Stories", value: "1000+", icon: TrendingUp },
               ].map((stat) => (
@@ -143,7 +143,7 @@ const Index = () => {
                   <span className="rounded-full bg-green-500/20 px-2 py-0.5 text-xs font-bold text-green-600 dark:text-green-400">POPULAR</span>
                 </div>
                 <h3 className="mb-2 text-xl font-bold">Chart Patterns</h3>
-                <p className="mb-4 text-sm text-muted-foreground">Learn 17 powerful patterns with practice quizzes, flashcards, and real trading examples</p>
+                <p className="mb-4 text-sm text-muted-foreground">Learn 17 chart patterns + 30 candlestick patterns with practice quizzes, flashcards, and real trading examples</p>
                 <Link to="/learn">
                   <Button className="w-full gap-2 bg-green-500 hover:bg-green-600">
                     View Patterns <ArrowRight className="h-4 w-4" />
@@ -183,8 +183,8 @@ const Index = () => {
               <BarChart3 className="h-4 w-4 text-primary" />
               <span className="text-xs font-bold uppercase tracking-wider text-primary">Technical Analysis</span>
             </div>
-            <h2 className="mb-2 font-display text-4xl font-bold">Master These 17 Patterns</h2>
-            <p className="text-lg text-muted-foreground">Professional patterns used by successful traders worldwide</p>
+            <h2 className="mb-2 font-display text-4xl font-bold">Master Chart Patterns</h2>
+            <p className="text-lg text-muted-foreground">17 professional chart patterns used by successful traders worldwide</p>
           </div>
           <SearchFilter
             search={search}
@@ -214,11 +214,11 @@ const Index = () => {
           <div className="grid gap-6 md:grid-cols-3">
             <div className="flex items-center gap-4 rounded-lg border bg-gradient-to-r from-green-500/10 to-emerald-500/10 p-6">
               <div className="rounded-full bg-green-500 p-3">
-                <TrendingUp className="h-6 w-6 text-white" />
+                <BarChart3 className="h-6 w-6 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-500">78% Avg</div>
-                <div className="text-sm text-muted-foreground">Pattern Success Rate</div>
+                <div className="text-2xl font-bold text-green-500">47 Total</div>
+                <div className="text-sm text-muted-foreground">Chart + Candlestick Patterns</div>
               </div>
             </div>
             <div className="flex items-center gap-4 rounded-lg border bg-gradient-to-r from-blue-500/10 to-purple-500/10 p-6">

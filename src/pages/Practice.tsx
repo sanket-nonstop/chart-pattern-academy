@@ -5,14 +5,25 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import { Target, CheckCircle2, XCircle, RotateCcw } from "lucide-react";
 
+// Shuffle function
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 const Practice = () => {
+  const [shuffledQuestions] = useState(() => shuffleArray(practiceQuestions));
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [score, setScore] = useState(0);
   const [completed, setCompleted] = useState(false);
   const [answers, setAnswers] = useState<boolean[]>([]);
 
-  const question = practiceQuestions[currentQuestion];
+  const question = shuffledQuestions[currentQuestion];
   const isCorrect = selectedAnswer === question.correctAnswer;
 
   const handleAnswer = (slug: string) => {
@@ -24,7 +35,7 @@ const Practice = () => {
   };
 
   const handleNext = () => {
-    if (currentQuestion < practiceQuestions.length - 1) {
+    if (currentQuestion < shuffledQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
     } else {
@@ -33,14 +44,10 @@ const Practice = () => {
   };
 
   const handleReset = () => {
-    setCurrentQuestion(0);
-    setSelectedAnswer(null);
-    setScore(0);
-    setCompleted(false);
-    setAnswers([]);
+    window.location.reload(); // Reload to get new shuffle
   };
 
-  const accuracy = completed ? Math.round((score / practiceQuestions.length) * 100) : 0;
+  const accuracy = completed ? Math.round((score / shuffledQuestions.length) * 100) : 0;
 
   if (completed) {
     return (
@@ -51,7 +58,7 @@ const Practice = () => {
             <Target className="mx-auto mb-4 h-16 w-16 text-primary" />
             <h1 className="mb-2 font-display text-3xl font-bold text-foreground">Practice Complete!</h1>
             <p className="mb-8 text-lg text-muted-foreground">
-              You scored <span className="font-bold text-primary">{score}/{practiceQuestions.length}</span> ({accuracy}%)
+              You scored <span className="font-bold text-primary">{score}/{shuffledQuestions.length}</span> ({accuracy}%)
             </p>
             <div className="mb-8 grid gap-2">
               {answers.map((correct, i) => (
@@ -83,14 +90,14 @@ const Practice = () => {
           <div className="mb-8 flex items-center justify-between">
             <h1 className="font-display text-2xl font-bold text-foreground">Pattern Recognition</h1>
             <span className="text-sm text-muted-foreground">
-              Question {currentQuestion + 1} of {practiceQuestions.length}
+              Question {currentQuestion + 1} of {shuffledQuestions.length}
             </span>
           </div>
 
           <div className="mb-6 h-2 overflow-hidden rounded-full bg-muted">
             <div
               className="h-full bg-primary transition-all"
-              style={{ width: `${((currentQuestion + 1) / practiceQuestions.length) * 100}%` }}
+              style={{ width: `${((currentQuestion + 1) / shuffledQuestions.length) * 100}%` }}
             />
           </div>
 
@@ -142,7 +149,7 @@ const Practice = () => {
                 {isCorrect ? "✓ Correct!" : `✗ Incorrect. The correct answer is ${patterns.find(p => p.slug === question.correctAnswer)?.name}`}
               </p>
               <Button onClick={handleNext}>
-                {currentQuestion < practiceQuestions.length - 1 ? "Next Question" : "Finish"}
+                {currentQuestion < shuffledQuestions.length - 1 ? "Next Question" : "Finish"}
               </Button>
             </div>
           )}

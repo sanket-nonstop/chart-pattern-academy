@@ -15,6 +15,7 @@ const FloatingSidebar = () => {
       pages: [
         { path: "/", label: "Home", icon: "🏠" },
         { path: "/basics", label: "Financial Basics", icon: "💰", badge: "Start Here" },
+        { path: "/start-investing", label: "Start Investing", icon: "🚀", badge: "New" },
       ],
     },
     {
@@ -42,11 +43,15 @@ const FloatingSidebar = () => {
       title: "🚀 Advanced Topics",
       color: "from-purple-500 to-pink-600",
       pages: [
+        { path: "/candlesticks", label: "Candlestick Patterns", icon: "🕯️" },
+        { path: "/price-action", label: "Price Action", icon: "📉", badge: "New" },
         { path: "/indicators", label: "Technical Indicators", icon: "📈" },
         { path: "/volume", label: "Volume Analysis", icon: "📊" },
         { path: "/fibonacci", label: "Fibonacci", icon: "🔢" },
         { path: "/open-interest", label: "Open Interest", icon: "💹" },
-        { path: "/candlesticks", label: "Candlestick Patterns", icon: "🕯️" },
+        { path: "/case-studies", label: "Case Studies", icon: "📚" },
+        { path: "/sector-analysis", label: "Sector Analysis", icon: "🏭" },
+        { path: "/pattern-combinations", label: "Pattern Combinations", icon: "🧩" },
       ],
     },
     {
@@ -85,16 +90,14 @@ const FloatingSidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed right-0 top-0 z-50 h-full w-80 transform bg-background shadow-2xl transition-transform duration-300 ${
-          isOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed right-0 top-0 z-50 h-full w-80 transform bg-background shadow-2xl transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="flex h-full flex-col">
           {/* Header */}
           <div className="flex items-center justify-between border-b bg-gradient-to-r from-blue-500 to-purple-600 p-4 text-white">
             <div>
-              <h2 className="text-lg font-bold">Navigation Hub</h2>
-              <p className="text-xs opacity-90">{totalPages} pages available</p>
+              <h2 className="text-lg font-bold">Navigation Hub</h2> 
             </div>
             <button
               onClick={() => setIsOpen(false)}
@@ -119,11 +122,10 @@ const FloatingSidebar = () => {
                         key={page.path}
                         to={page.path}
                         onClick={() => setIsOpen(false)}
-                        className={`flex items-center gap-3 rounded-lg p-3 transition-all ${
-                          isActive
+                        className={`flex items-center gap-3 rounded-lg p-3 transition-all ${isActive
                             ? "bg-primary text-primary-foreground shadow-md"
                             : "hover:bg-muted"
-                        }`}
+                          }`}
                       >
                         <span className="text-xl">{page.icon}</span>
                         <span className="flex-1 text-sm font-medium">{page.label}</span>
